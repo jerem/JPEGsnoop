@@ -311,11 +311,9 @@ BEGIN
     LTEXT           "JPEGsnoop",IDC_STATIC,42,6,39,8,SS_NOPREFIX
     LTEXT           "Copyright © 2010 Calvin Hass",IDC_STATIC,42,18,124,8
     DEFPUSHBUTTON   "OK",IDOK,185,7,50,16,WS_GROUP
-    LTEXT           "www.impulseadventure.com/photo/",IDC_URL,24,72,117,8
+    LTEXT           "www.impulseadventure.com/photo/",IDC_URL,24,66,117,8
     LTEXT           "Documentation and Updates for JPEGsnoop",IDC_URL_DOC,24,
                     48,169,8
-    LTEXT           "Comments, suggestions: jpegsnoop@impulseadventure.com",
-                    IDC_STATIC,24,60,202,8
     LTEXT           "Version",IDC_VER_NUM,96,6,86,10
     GROUPBOX        "",IDC_STATIC,12,36,222,54
 END
@@ -596,17 +594,34 @@ BEGIN
     EDITTEXT        IDC_EDIT_FNAME,66,12,120,14,ES_AUTOHSCROLL | ES_READONLY
 END
 
-IDD_BATCHDLG DIALOGEX 0, 0, 186, 78
+IDD_BATCHDLG DIALOGEX 0, 0, 232, 108
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Batch Processing"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,126,36,50,16
-    PUSHBUTTON      "Cancel",IDCANCEL,126,54,50,16
+    DEFPUSHBUTTON   "OK",IDOK,162,66,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,162,84,50,16
     CONTROL         "Process subdirectories?",IDC_CHECK_SUBDIRS,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,12,42,98,10
-    EDITTEXT        IDC_EDIT_DIR,12,18,162,14,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "Directory:",IDC_STATIC,6,6,42,8
+                    BS_AUTOCHECKBOX | WS_TABSTOP,30,73,98,10
+    EDITTEXT        IDC_EDIT_DIR,30,49,180,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Directory:",IDC_STATIC,24,36,42,8
+    LTEXT           "NOTE 1: Recommend for use on backup copy of files only",
+                    IDC_STATIC,6,6,186,8
+    LTEXT           "NOTE 2: For faster operation, disable ""Decode Image"" before use",
+                    IDC_STATIC,6,18,210,8
+END
+
+IDD_OPERATIONDLG DIALOGEX 0, 0, 186, 73
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Operation Progress"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Abort",ID_BTN_ABORT,66,48,50,14
+    CONTROL         "",IDC_PROGRESS_BAR,"msctls_progress32",WS_BORDER,6,6,
+                    174,14
+    CTEXT           "Progress: ddd of ddd",IDC_STATIC_PROGRESS,6,24,174,12,
+                    SS_SUNKEN
 END
 
 
@@ -616,8 +631,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,5,0,0
- PRODUCTVERSION 1,5,0,0
+ FILEVERSION 1,5,1,0
+ PRODUCTVERSION 1,5,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -634,12 +649,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "ImpulseAdventure"
             VALUE "FileDescription", "JPEGsnoop"
-            VALUE "FileVersion", "1.5.0.0"
+            VALUE "FileVersion", "1.5.1.0"
             VALUE "InternalName", "JPEGsnoop.exe"
             VALUE "LegalCopyright", "(c) 2010 Calvin Hass.  All rights reserved."
             VALUE "OriginalFilename", "JPEGsnoop.exe"
             VALUE "ProductName", "JPEGsnoop"
-            VALUE "ProductVersion", "1.5.0.0"
+            VALUE "ProductVersion", "1.5.1.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -772,9 +787,17 @@ BEGIN
     IDD_BATCHDLG, DIALOG
     BEGIN
         LEFTMARGIN, 7
+        RIGHTMARGIN, 225
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_OPERATIONDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
         RIGHTMARGIN, 179
         TOPMARGIN, 7
-        BOTTOMMARGIN, 71
+        BOTTOMMARGIN, 66
     END
 END
 #endif    // APSTUDIO_INVOKED
